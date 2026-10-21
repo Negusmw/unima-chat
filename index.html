@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UNIMA Chat & Library</title>
+<link rel="manifest" href="static/manifest.json">
+<meta name="theme-color" content="#254EDB">
+<link rel="icon" href="static/icon-192.png">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,system-ui;background:#0c1022;color:#fff;height:100vh;display:flex}
+.sidebar{width:300px;background:#12173f;padding:24px;display:flex;flex-direction:column;gap:16px}
+.logo{width:64px;height:64px;background:#fff;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#254EDB;font-weight:900;font-size:36px}
+.main{flex:1;display:flex;flex-direction:column;background:#0f1333}
+.top{padding:16px;border-bottom:1px solid #1e274e}
+.chat{flex:1;padding:20px;overflow-y:auto}
+.bubble{background:#1e274e;padding:12px 16px;border-radius:14px;margin:10px 0;max-width:70%}
+.row{display:flex;padding:12px;gap:10px;background:#11163a}
+.row input{flex:1;padding:14px;border-radius:12px;border:0;background:#1e274e;color:#fff}
+.row button{padding:14px 20px;background:#254EDB;color:#fff;border:0;border-radius:12px;font-weight:700}
+a{color:#7ea0ff;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="sidebar">
+<div class="logo">U</div>
+<h2>UNIMA Chat</h2>
+<div>💬 Chat</div><div>🎤 Voice</div><div>📹 Video</div><div>📚 Library</div>
+<hr style="border-color:#1e274e">
+<p style="opacity:.7;font-size:13px">Your blue U icons are now live. Install this app: File > Add to Dock on Mac.</p>
+<a href="static/icon-512.png" target="_blank">View Icon 512</a>
+</div>
+<div class="main">
+<div class="top"><b>General • UNIMA Students</b></div>
+<div class="chat" id="chat"><div class="bubble">Welcome! Your PWA is working. The icons you generated on your Mac are now on GitHub ✅</div></div>
+<div class="row"><input id="inp" placeholder="Type a message..."><button onclick="send()">Send</button></div>
+</div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('static/sw.js')}
+function send(){const i=document.getElementById('inp');if(!i.value)return;const d=document.createElement('div');d.className='bubble';d.textContent=i.value;document.getElementById('chat').appendChild(d);i.value='';document.getElementById('chat').scrollTop=9999}
+document.getElementById('inp').addEventListener('keydown',e=>{if(e.key==='Enter')send()})
+</script>
+</body>
+</html>
